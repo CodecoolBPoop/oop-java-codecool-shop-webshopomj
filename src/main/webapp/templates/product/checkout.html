@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Codecool Shop</title>
+
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+<!--netről szedett cucc-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+</head>
+<body>
+
+<div class="jumbotron text-center">
+    <h1>Codecool Shop</h1>
+</div>
+
+<div class="container">
+    <div class="well well-sm" align="center">
+        <div class="row">
+            <div class="col-50">
+                <h2>Personal Data</h2>
+                <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+
+                <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                <input type="text" id="email" name="email" placeholder="john@example.com">
+
+                <label for="phonenumber"><i class="fa fa-phone"></i> Phone number</label>
+                <input type="text" id="phonenumber" name="phonenumber" placeholder="00-00-000-0000">
+            </div>
+
+            <div class="col-50">
+                <h2>Billing Address</h2>
+                <label for="bill-country">Country</label>
+                <input type="text" id="bill-country" name="bill-country" placeholder="Hungary">
+
+                <label for="bill-city">City</label>
+                <input type="text" id="bill-city" name="bill-city" placeholder="Budapest">
+
+                <label for="bill-zip">Zipcode</label>
+                <input type="text" id="bill-zip" name="bill-zip" placeholder="1087">
+
+                <label for="bill-adr">Address</label>
+                <input type="text" id="bill-adr" name="bill-address" placeholder="542 W. 15th Street">
+            </div>
+
+            <div class="col-50">
+                <h2>Shipping Address</h2>
+                <label for="ship-country">Country</label>
+                <input type="text" id="ship-country" name="ship-country" placeholder="Hungary">
+
+                <label for="ship-city">City</label>
+                <input type="text" id="ship-city" name="ship-city" placeholder="Budapest">
+
+                <label for="ship-zip">Zipcode</label>
+                <input type="text" id="ship-zip" name="ship-zip" placeholder="1087">
+
+                <label for="ship-adr">Address</label>
+                <input type="text" id="ship-adr" name="ship-address" placeholder="542 W. 15th Street">
+            </div>
+        </div>
+
+        <br>
+        <label>
+            <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+        </label>
+        <input type="submit" value="Continue to checkout" class="btn">
+    </div>
+</div>
+
+<div th:replace="footer.html :: copy"></div>
+
+</body>
+</html>
