@@ -26,6 +26,14 @@
 </head>
 
 <body>
+    <div class="jumbotron text-center">
+        <h1>
+            <a href="/" class="head-title">Codecool Shop</a>
+        </h1>
+        <div class="item col-xs-2 col-lg-2" th:each="inc,iterStat : ${inCart}">
+            <p th:text="${inc}"></p>
+        </div>
+    </div>
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
 </div>
