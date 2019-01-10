@@ -21,13 +21,12 @@ public class Product extends BaseModel {
         this.setProductCategory(productCategory);
     }
 
-    public Product(int id, int orderID, String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
+    public Product(int orderID, String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
         this.orderID = orderID;
-        this.id = id;
     }
 
     public Product(Product product) {

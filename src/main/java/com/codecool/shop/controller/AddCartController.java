@@ -38,7 +38,6 @@ public class AddCartController extends HttpServlet {
         String indexOfItem = req.getParameter("incoming");
         int intIndex = Integer.parseInt(indexOfItem) -1;
 
-
         // new object attributes
         int orderId = ShoppingCart.numOfItemsInShoppingCart += 1;
         int id = productDataStore.getAll().get(intIndex).getId();
@@ -50,19 +49,15 @@ public class AddCartController extends HttpServlet {
         Supplier supp = productDataStore.getAll().get(intIndex).getSupplier();
 
         // construct new Product object to add to Shopping Cart
-        Product itemIntoShoppingCart = new Product(id, orderId, name, price, curr, description, prcat, supp);
-         cartDataStore.add(itemIntoShoppingCart);
+        Product itemIntoShoppingCart = new Product(orderId, name, price, curr, description, prcat, supp);
+        ((ShoppingCartDaoMem) cartDataStore).add(itemIntoShoppingCart, id);
 
-        System.out.println(ShoppingCart.numOfItemsInShoppingCart);
-        System.out.println(cartDataStore.getAll() + "\n");
-
-        //TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        //WebContext context = new WebContext(req, resp, req.getServletContext());
-        //context.setVariable("cart", cartDataStore.getAll());
-        //engine.process("/shoppingcart.html", context, resp.getWriter());
+        System.out.println("    id to add:     :" + id);
+        System.out.println("    NEW ITEM TO CART    :" + itemIntoShoppingCart);
+        System.out.println("    THIS MANY ITEMS IN CART     :" + ShoppingCart.numOfItemsInShoppingCart);
+        System.out.println("    THESE ARE IN CART     :" + cartDataStore.getAll() + "\n");
 
         resp.sendRedirect("index.html");
 
     }
-
 }

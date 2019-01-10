@@ -28,11 +28,11 @@
 <body>
     <div class="jumbotron text-center">
         <h1>Codecool Shop</h1>
-            <div>
-                <button id="cart">Shopping Cart</button>
-            </div>
+        <div class="item col-xs-4 col-lg-4" th:each="inc,iterStat : ${inCart}">
+            <p th:text="${inc}"></p>
+        </div>
     </div>
-    <p th:each="prod,iterStat : ${items}">></p>
+
     <div th:replace="footer.html :: copy"></div>
 </body>
 </html>
