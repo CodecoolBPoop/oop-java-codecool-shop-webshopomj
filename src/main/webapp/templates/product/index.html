@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -24,13 +23,25 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
+
+    <script src="static/javascript.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
 
 <body>
-
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <h1>
+        <a href="/" class="head-title">Codecool Shop</a>
+
+    </h1>
+<!--TO SHOPPING CART -->
+    <div>
+        <a href="/shoppingcart" name="checkCart" methods="get"  >
+            <button class="btn btn-success carto" type="submit" name="incoming">Shopping Cart</button>
+            <p id="counter" class="carto" th:text="${numofitems}"></p>
+        </a>
+    </div>
 </div>
 
 <div class="container">
@@ -66,7 +77,10 @@
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="#">Add to cart</a>
+                            <!--    ADDING TO CART  -->
+                            <form action="/cart"  name="addCart" method="post" >
+                                <button class="btn btn-success" type="submit" name="incoming" th:value="${prod.getId()}">Add to cart</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -79,4 +93,7 @@
 <div th:replace="footer.html :: copy"></div>
 
 </body>
+
+<!-- Event listeners -->
+<script type="text/javascript" src="static/js/event_listeners.js"></script>
 </html>

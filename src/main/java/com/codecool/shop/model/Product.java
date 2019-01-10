@@ -8,13 +8,29 @@ public class Product extends BaseModel {
     private Currency defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
+    private int orderID;
 
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
 
     public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
+    }
+
+    public Product(int orderID, String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
+        super(name, description);
+        this.setPrice(defaultPrice, currencyString);
+        this.setSupplier(supplier);
+        this.setProductCategory(productCategory);
+        this.orderID = orderID;
+    }
+
+    public Product(Product product) {
+
     }
 
     public float getDefaultPrice() {
@@ -29,12 +45,20 @@ public class Product extends BaseModel {
         return defaultCurrency;
     }
 
+    public String curr() {
+        return this.defaultCurrency.toString();
+    }
+
     public void setDefaultCurrency(Currency defaultCurrency) {
         this.defaultCurrency = defaultCurrency;
     }
 
     public String getPrice() {
         return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
+    }
+
+    public float getPr() {
+        return this.defaultPrice;
     }
 
     public void setPrice(float price, String currency) {
@@ -63,12 +87,14 @@ public class Product extends BaseModel {
     @Override
     public String toString() {
         return String.format("id: %1$d, " +
-                        "name: %2$s, " +
-                        "defaultPrice: %3$f, " +
-                        "defaultCurrency: %4$s, " +
-                        "productCategory: %5$s, " +
-                        "supplier: %6$s",
+                        "orderID: %2$d, " +
+                        "name: %3$s, " +
+                        "defaultPrice: %4$f, " +
+                        "defaultCurrency: %5$s, " +
+                        "productCategory: %6$s, " +
+                        "supplier: %7$s",
                 this.id,
+                this.orderID,
                 this.name,
                 this.defaultPrice,
                 this.defaultCurrency.toString(),
