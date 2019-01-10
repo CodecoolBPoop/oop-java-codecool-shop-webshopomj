@@ -37,11 +37,20 @@
     <div class="well well-sm">
         <form action="/" method="get">
             <select name="category">
-                <option >All</option>
+                <option>All</option>
                 <option th:each="categ,iterStat : ${category}" th:text="${categ.name}">Category Title</option>
             </select>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Filter by Category">
         </form>
+
+        <form action="/" method="get">
+            <select name="supplier">
+                <option>All</option>
+                <option th:each="suppl,iterStat : ${supplier}" th:text="${suppl.name}">Supplier Name</option>
+            </select>
+            <input type="submit" value="Filter by Supplier">
+        </form>
+
     </div>
 
     <div id="products" class="row list-group">
