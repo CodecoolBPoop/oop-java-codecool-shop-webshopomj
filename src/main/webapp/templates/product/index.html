@@ -24,7 +24,7 @@
             crossorigin="anonymous"></script>
 
 
-
+    <script src="static/javascript.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
@@ -33,11 +33,15 @@
 <div class="jumbotron text-center">
     <h1>
         <a href="/" class="head-title">Codecool Shop</a>
+
     </h1>
 <!--TO SHOPPING CART -->
-    <a href="/shoppingcart"  name="checkCart" methods="get" >
-        <button class="btn btn-success" type="submit" name="incoming">Shopping Cart</button>
-    </a>
+    <div>
+        <a href="/shoppingcart" name="checkCart" methods="get"  >
+            <button class="btn btn-success carto" type="submit" name="incoming">Shopping Cart</button>
+            <p id="counter" class="carto" th:text="${numofitems}"></p>
+        </a>
+    </div>
 </div>
 
 <div class="container">

@@ -19,6 +19,7 @@ import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,6 +51,7 @@ public class AddCartController extends HttpServlet {
 
         // construct new Product object to add to Shopping Cart
         Product itemIntoShoppingCart = new Product(orderId, name, price, curr, description, prcat, supp);
+
         ((ShoppingCartDaoMem) cartDataStore).add(itemIntoShoppingCart, id);
 
         System.out.println("    id to add:     :" + id);

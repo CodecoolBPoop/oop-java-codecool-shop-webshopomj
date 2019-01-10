@@ -19,6 +19,24 @@
     text-decoration:none;
 }
 
+#counter{
+    color: black;
+}
+
+.carto{
+    display: inline;
+    width: 100px;
+    height: 35px;
+    padding: 5px;
+    color: white;
+    background-color: white;
+}
+
+.carto:hover {
+    color: black;
+    text-decoration:none;
+}
+
 .item.list-group-item
 {
     float: none;

@@ -11,6 +11,7 @@ import java.util.List;
 public class ShoppingCartDaoMem implements ShoppingCartDao {
     private List<Product> data = new ArrayList<>();
     private static ShoppingCartDaoMem instance = null;
+    public static int itemsInCart;
 
     private ShoppingCartDaoMem(){
 
@@ -34,6 +35,7 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     public void add(Product product, int id) {
         product.setId(id);
         data.add(product);
+        itemsInCart +=1;
     }
 
     @Override
@@ -50,5 +52,9 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     @Override
     public List<Product> getAll() {
         return data;
+    }
+
+    public int getItemsInCart(){
+        return itemsInCart;
     }
 }
