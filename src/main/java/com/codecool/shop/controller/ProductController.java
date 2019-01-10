@@ -65,6 +65,8 @@ public class ProductController extends HttpServlet {
                 context.setVariable("products", productDataStore.getBy(supplierDataStore.find(1)));
             } else if (req.getParameter("supplier").equals("Lenovo")) {
                 context.setVariable("products", productDataStore.getBy(supplierDataStore.find(2)));
+            } else if (req.getParameter("supplier").equals("Samsung")) {
+                context.setVariable("products", productDataStore.getBy(supplierDataStore.find(3)));
             }
         }
 
