@@ -13,6 +13,12 @@
 {
     margin-top: 10px;
 }
+
+.head-title:hover {
+    color: #337ab7;
+    text-decoration:none;
+}
+
 .item.list-group-item
 {
     float: none;

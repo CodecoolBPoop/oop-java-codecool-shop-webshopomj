@@ -22,13 +22,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
 
 <body>
     <div class="jumbotron text-center">
-        <h1>Codecool Shop</h1>
-        <div class="item col-xs-4 col-lg-4" th:each="inc,iterStat : ${inCart}">
+        <h1>
+            <a href="/" class="head-title">Codecool Shop</a>
+        </h1>
+        <div class="item col-xs-2 col-lg-2" th:each="inc,iterStat : ${inCart}">
             <p th:text="${inc}"></p>
         </div>
     </div>
