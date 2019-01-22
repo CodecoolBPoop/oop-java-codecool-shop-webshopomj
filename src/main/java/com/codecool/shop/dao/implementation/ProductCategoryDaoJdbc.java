@@ -24,8 +24,7 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
         executeQuery(query);
     }
 
-    @Override
-    public ProductCategory find(int id) {
+    public static ProductCategory find(int id) {
         String query = "SELECT * FROM product_categories WHERE id = '" + id + "';";
 
         try (Connection connection = getConnection();
@@ -92,7 +91,7 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
         }
     }
 
-    private Connection getConnection() throws SQLException {
+    private static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
     }
 
