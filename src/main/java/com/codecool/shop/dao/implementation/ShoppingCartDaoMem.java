@@ -2,16 +2,23 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ShoppingCart;
-import com.codecool.shop.model.Supplier;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartDaoMem implements ShoppingCartDao {
-    private List<Product> data = new ArrayList<>();
+    private List<Product> allProductsInShoppingCart = new ArrayList<>();
     private static ShoppingCartDaoMem instance = null;
-    public static int itemsInCart;
+    private int numOfItemsInCart;
+
+    public int getNumOfItemsInCart(){
+        return this.numOfItemsInCart;
+    }
+
+    public void reduceNumOfItemsInCart(){
+        numOfItemsInCart -=1;
+    }
+
 
     private ShoppingCartDaoMem(){
 
@@ -27,34 +34,38 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
 
 
     @Override
-    public void add(Product product) {
-        product.setId(data.size());
-        data.add(product);
+    public void addToShoppingCart(Product product) {
+        product.setId(allProductsInShoppingCart.size());
+        allProductsInShoppingCart.add(product);
     }
 
-    public void add(Product product, int id) {
+    public void addToShoppingCart(Product product, int id) {
         product.setId(id);
-        data.add(product);
-        itemsInCart +=1;
+        allProductsInShoppingCart.add(product);
+        numOfItemsInCart +=1;
     }
 
     @Override
     public Product find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+        return allProductsInShoppingCart.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
 
 
     @Override
-    public void remove(int id) {
-        data.remove(find(id));
+    public void removeItemFromShoppingCart(int orderID) {
+        for (int i = 0; i < allProductsInShoppingCart.size(); i++) {
+            if (allProductsInShoppingCart.get(i).getOrderID() == orderID) {
+                allProductsInShoppingCart.remove(i);
+            }
+        }
     }
 
     @Override
-    public List<Product> getAll() {
-        return data;
+    public List<Product> getAllProductsInShoppingCart() {
+        return allProductsInShoppingCart;
     }
 
     public int getItemsInCart(){
-        return itemsInCart;
+        return numOfItemsInCart;
     }
 }

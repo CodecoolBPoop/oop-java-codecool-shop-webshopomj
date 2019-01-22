@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/cart"})
-public class AddCartController extends HttpServlet {
+public class AddToShoppingCartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
@@ -52,13 +52,14 @@ public class AddCartController extends HttpServlet {
         // construct new Product object to add to Shopping Cart
         Product itemIntoShoppingCart = new Product(orderId, name, price, curr, description, prcat, supp);
 
-        ((ShoppingCartDaoMem) cartDataStore).add(itemIntoShoppingCart, id);
+        ((ShoppingCartDaoMem) cartDataStore).addToShoppingCart(itemIntoShoppingCart, id);
 
+        /*
         System.out.println("    id to add:     :" + id);
         System.out.println("    NEW ITEM TO CART    :" + itemIntoShoppingCart);
         System.out.println("    THIS MANY ITEMS IN CART     :" + ShoppingCart.numOfItemsInShoppingCart);
         System.out.println("    THESE ARE IN CART     :" + cartDataStore.getAll() + "\n");
-
+        */
         resp.sendRedirect("index.html");
 
     }

@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ShoppingCartDao {
 
-    void add(Product product);
+    void addToShoppingCart(Product product);
     Product find(int id);
-    void remove(int id);
+    void removeItemFromShoppingCart(int id);
 
-    List<Product> getAll();
+    List<Product> getAllProductsInShoppingCart();
 }

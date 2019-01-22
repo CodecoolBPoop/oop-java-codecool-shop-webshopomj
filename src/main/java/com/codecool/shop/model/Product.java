@@ -8,6 +8,11 @@ public class Product extends BaseModel {
     private Currency defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
+
+    public int getOrderID() {
+        return orderID;
+    }
+
     private int orderID;
 
     public void setOrderID(int orderID) {
