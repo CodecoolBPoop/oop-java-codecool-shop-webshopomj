@@ -27,6 +27,6 @@ public class RemoveItemFromShoppingCartController extends HttpServlet {
         cartDataStore.removeItemFromShoppingCart(orderIdOfRemovableItem);
         ((ShoppingCartDaoMem) cartDataStore).reduceNumOfItemsInCart();
 
-        response.sendRedirect("shoppingcart.html");
+        response.sendRedirect("shoppingcart");
     }
 }

@@ -41,6 +41,7 @@
             <th> </th>
             <th>Product name</th>
             <th>Price</th>
+            <th>Remove item</th>
         </tr>
         <tr th:each="inc,iterStat : ${inCart}">
             <td th:attr="src='/static/img/product_' + ${inc.id} + '.jpg'"></td>
@@ -48,7 +49,7 @@
             <td th:text="${inc.getPrice()}">Price</td>
             <td>
                 <form action="/removeItemFromShoppingCart" method="get">
-                    <button class="btn btn-success" type="submit" name="orderIDOfChosenItemOfShoppingCArt" th:value="${inc.getOrderID()}"><i class="fa fa-trash fa-fw"></i></button>
+                    <button class="btn btn-danger" type="submit" name="orderIDOfChosenItemOfShoppingCArt" th:value="${inc.getOrderID()}"><i class="fa fa-trash fa-fw"></i></button>
                 </form>
             </td>
         </tr>
