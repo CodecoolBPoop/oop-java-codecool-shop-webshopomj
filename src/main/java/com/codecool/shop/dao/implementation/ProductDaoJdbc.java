@@ -8,9 +8,10 @@ import com.codecool.shop.model.ProductCategory;
 import java.sql.*;
 
 public class ProductDaoJdbc implements ProductDao {
-    private static final String DATABASE;
-    private static final String DB_USER;
-    private static final String DB_PASSWORD;
+
+    private static final String DATABASE = System.getenv("DATABASE");
+    private static final String DB_USER = System.getenv("DB_USER");
+    private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
 
     @Override
     public void add(Product product) {
@@ -22,7 +23,7 @@ public class ProductDaoJdbc implements ProductDao {
                 + product.getDefaultCurrency() + "', '"
                 + product.getDescription() + "', '"
                 + 1 + "', '"
-                + 1 + "'); '";
+                + 1 + "');";
         executeQuery(query);
     }
 
