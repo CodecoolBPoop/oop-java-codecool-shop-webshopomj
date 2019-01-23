@@ -34,6 +34,10 @@ public class Product extends BaseModel {
 
     }
 
+    public int getId() {
+        return id;
+    }
+
     public float getDefaultPrice() {
         return defaultPrice;
     }
