@@ -23,27 +23,32 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script src="/static/javascript.js"></script>
 </head>
 
 <body>
-    <div class="jumbotron text-center">
-        <h1>
-            <a href="/" class="head-title">Codecool Shop</a>
-        </h1>
+<div class="jumbotron text-center">
+    <h1>
+        <a href="/" class="head-title">Codecool Shop</a>
+    </h1>
 
-    </div>
+</div>
 
-<div class="container" >
+<div class="container">
     <table class="table">
-        <tr >
-            <th> </th>
+        <tr>
+            <th></th>
             <th>Product name</th>
             <th>Price</th>
+            <th>Remove item</th>
         </tr>
         <tr th:each="inc,iterStat : ${inCart}">
             <td th:attr="src='/static/img/product_' + ${inc.id} + '.jpg'"></td>
             <td th:text="${inc.name}">Item name</td>
             <td th:text="${inc.getPrice()}">Price</td>
+            <td><button type="button" th:id="${inc.getOrderID()}" class="icon-button btn btn-danger fa fa-trash fa-fw"><i></i></button></td>
         </tr>
     </table>
     <p></p>

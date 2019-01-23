@@ -10,6 +10,8 @@ public class Product extends BaseModel {
     private Supplier supplier;
     private int orderID;
 
+    public int getOrderID(){return this.orderID;}
+
     public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
