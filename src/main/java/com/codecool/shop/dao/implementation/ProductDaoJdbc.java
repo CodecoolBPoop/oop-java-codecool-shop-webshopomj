@@ -14,8 +14,8 @@ public class ProductDaoJdbc implements ProductDao {
     private static final String DATABASE = System.getenv("DATABASE");
     private static final String DB_USER = System.getenv("DB_USER");
     private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
-    private ProductCategoryDaoJdbc productCategoryDaoJdbc;
-    private SupplierDaoJdbc supplierDaoJdbc;
+    private ProductCategoryDaoJdbc productCategoryDaoJdbc = new ProductCategoryDaoJdbc();
+    private SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc();
 
     @Override
     public void add(Product product) {
@@ -67,7 +67,7 @@ public class ProductDaoJdbc implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        String query = "SELCET * FROM products;";
+        String query = "SELECT * FROM products;";
 
         List<Product> resultList = new ArrayList<>();
 

@@ -21,9 +21,9 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
 
-    private ProductCategoryDaoJdbc productCategoryDaoJdbc;
-    private SupplierDaoJdbc supplierDaoJdbc;
-    private ProductDaoJdbc productDaoJdbc;
+    private ProductCategoryDaoJdbc productCategoryDaoJdbc = new ProductCategoryDaoJdbc();
+    private SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc();
+    private ProductDaoJdbc productDaoJdbc = new ProductDaoJdbc();
 
 
     @Override
