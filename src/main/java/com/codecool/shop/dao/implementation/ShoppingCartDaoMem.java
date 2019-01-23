@@ -2,7 +2,6 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.controller.AddCartController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +45,7 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     @Override
     public void remove(int id) {
         data.remove(find(id));
+        itemsInCart -=1;
     }
 
     @Override
