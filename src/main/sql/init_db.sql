@@ -69,3 +69,26 @@ ALTER TABLE ONLY products
 ALTER TABLE ONLY shopping_cart
     ADD CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES products(id);
 
+
+INSERT INTO suppliers (name, description)
+    VALUES ('Amazon', 'Digital content and services');
+INSERT INTO suppliers (name, description)
+    VALUES ('Lenovo', 'Computers');
+INSERT INTO suppliers (name, description)
+    VALUES ('Samsung', 'Phones');
+
+INSERT INTO product_categories (name, department, description)
+    VALUES ('Tablet', 'Hardware', 'A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.');
+INSERT INTO product_categories (name, department, description)
+    VALUES ('Phone', 'Hardware', '...');
+
+INSERT INTO products (name, default_price, currency, description, product_category_id, supplier_id)
+    VALUES ('Amazon Fire', 49.9, 'USD', 'Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.', 1, 1);
+INSERT INTO products (name, default_price, currency, description, product_category_id, supplier_id)
+    VALUES ('Lenovo IdeaPad Miix 700', 479, 'USD', 'Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.', 1, 2);
+INSERT INTO products (name, default_price, currency, description, product_category_id, supplier_id)
+    VALUES ('Amazon Fire HD 8', 89, 'USD', 'Amazons latest Fire HD 8 tablet is a great value for media consumption.', 1, 1);
+INSERT INTO products (name, default_price, currency, description, product_category_id, supplier_id)
+    VALUES ('Samsung Galaxy S8', 499, 'USD', 'A Samsung phone... There were at least seven before this.', 2, 3);
+INSERT INTO products (name, default_price, currency, description, product_category_id, supplier_id)
+    VALUES ('Samsung Galaxy Tab S4', 179, 'USD', 'Full-size USB ports. Fantastic price. Great value.', 1, 3);
