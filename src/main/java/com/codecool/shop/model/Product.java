@@ -8,13 +8,13 @@ public class Product extends BaseModel {
     private Currency defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
-    private int orderID;
+//    private int orderID;
     private int id;
-
+/*
     public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
-
+*/
     public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
@@ -88,14 +88,14 @@ public class Product extends BaseModel {
     @Override
     public String toString() {
         return String.format("id: %1$d, " +
-                        "orderID: %2$d, " +
-                        "name: %3$s, " +
-                        "defaultPrice: %4$f, " +
-                        "defaultCurrency: %5$s, " +
-                        "productCategory: %6$s, " +
-                        "supplier: %7$s",
+//                        "orderID: %2$d, " +
+                        "name: %2$s, " +
+                        "defaultPrice: %3$f, " +
+                        "defaultCurrency: %4$s, " +
+                        "productCategory: %5$s, " +
+                        "supplier: %6$s",
                 this.id,
-                this.orderID,
+//                this.orderID,
                 this.name,
                 this.defaultPrice,
                 this.defaultCurrency.toString(),

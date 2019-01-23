@@ -29,7 +29,7 @@ public class ProductDaoMem implements ProductDao {
 
     @Override
     public void add(Product product) {
-        product.setId(data.size() + 1);
+//        product.setId(data.size() + 1);
         data.add(product);
     }
 
