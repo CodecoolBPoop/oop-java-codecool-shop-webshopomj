@@ -14,6 +14,8 @@ public class ProductDaoJdbc implements ProductDao {
     private static final String DATABASE = System.getenv("DATABASE");
     private static final String DB_USER = System.getenv("DB_USER");
     private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
+    private ProductCategoryDaoJdbc productCategoryDaoJdbc;
+    private SupplierDaoJdbc supplierDaoJdbc;
 
     @Override
     public void add(Product product) {
@@ -44,8 +46,8 @@ public class ProductDaoJdbc implements ProductDao {
                         resultSet.getFloat("default_price"),
                         resultSet.getString("currency"),
                         resultSet.getString("description"),
-                        ProductCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
-                        SupplierDaoJdbc.find(resultSet.getInt("supplier_id")));
+                        productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
+                        supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
                 return result;
             } else {
                 return null;
@@ -63,7 +65,8 @@ public class ProductDaoJdbc implements ProductDao {
         executeQuery(query);
     }
 
-    public static List<Product> getAll() {
+    @Override
+    public List<Product> getAll() {
         String query = "SELCET * FROM products;";
 
         List<Product> resultList = new ArrayList<>();
@@ -79,8 +82,8 @@ public class ProductDaoJdbc implements ProductDao {
                         resultSet.getFloat("default_price"),
                         resultSet.getString("currency"),
                         resultSet.getString("description"),
-                        ProductCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
-                        SupplierDaoJdbc.find(resultSet.getInt("supplier_id")));
+                        productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
+                        supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
                 resultList.add(result);
             } else {
                 return null;
@@ -109,8 +112,8 @@ public class ProductDaoJdbc implements ProductDao {
                         resultSet.getFloat("default_price"),
                         resultSet.getString("currency"),
                         resultSet.getString("description"),
-                        ProductCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
-                        SupplierDaoJdbc.find(resultSet.getInt("supplier_id")));
+                        productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
+                        supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
                 resultList.add(result);
             } else {
                 return null;
@@ -139,8 +142,8 @@ public class ProductDaoJdbc implements ProductDao {
                         resultSet.getFloat("default_price"),
                         resultSet.getString("currency"),
                         resultSet.getString("description"),
-                        ProductCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
-                        SupplierDaoJdbc.find(resultSet.getInt("supplier_id")));
+                        productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
+                        supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
                 resultList.add(result);
             } else {
                 return null;
@@ -162,7 +165,7 @@ public class ProductDaoJdbc implements ProductDao {
         }
     }
 
-    private static Connection getConnection() throws SQLException {
+    private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
     }
 

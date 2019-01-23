@@ -21,6 +21,11 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
 
+    private ProductCategoryDaoJdbc productCategoryDaoJdbc;
+    private SupplierDaoJdbc supplierDaoJdbc;
+    private ProductDaoJdbc productDaoJdbc;
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         /*
@@ -68,9 +73,10 @@ public class ProductController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         context.setVariable("recipient", "World");
-        context.setVariable("category", ProductCategoryDaoJdbc.getAll());
-        context.setVariable("supplier", SupplierDaoJdbc.getAll());
-        context.setVariable("product", ProductDaoJdbc.getAll());
+
+        context.setVariable("category", productCategoryDaoJdbc.getAll());
+        context.setVariable("supplier", supplierDaoJdbc.getAll());
+        context.setVariable("product", productDaoJdbc.getAll());
 
 
 

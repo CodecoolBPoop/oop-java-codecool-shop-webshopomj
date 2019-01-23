@@ -7,9 +7,9 @@ import java.util.List;
 public interface ProductCategoryDao {
 
     void add(ProductCategory category);
-    static ProductCategory find(int id) {return null;}
+    ProductCategory find(int id);
     void remove(int id);
 
-    static List<ProductCategory> getAll() {return null;}
+    List<ProductCategory> getAll();
 
 }

@@ -20,7 +20,8 @@ public class SupplierDaoJdbc implements SupplierDao {
         executeQuery(query);
     }
 
-    public static Supplier find(int id) {
+    @Override
+    public Supplier find(int id) {
         String query = "SELECT * FROM suppliers WHERE id = '" + id + "';";
 
         try (Connection connection = getConnection();
@@ -49,7 +50,8 @@ public class SupplierDaoJdbc implements SupplierDao {
         executeQuery(query);
     }
 
-    public static List<Supplier> getAll() {
+    @Override
+    public List<Supplier> getAll() {
         String query = "SELECT * FROM suppliers;";
 
         List<Supplier> resultList = new ArrayList<>();
@@ -84,7 +86,7 @@ public class SupplierDaoJdbc implements SupplierDao {
         }
     }
 
-    private static Connection getConnection() throws SQLException {
+    private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
     }
 }

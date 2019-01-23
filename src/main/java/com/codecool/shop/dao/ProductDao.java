@@ -12,7 +12,7 @@ public interface ProductDao {
     Product find(int id);
     void remove(int id);
 
-    static List<Product> getAll() {return null;}
+    List<Product> getAll();
     List<Product> getBy(Supplier supplier);
     List<Product> getBy(ProductCategory productCategory);
 

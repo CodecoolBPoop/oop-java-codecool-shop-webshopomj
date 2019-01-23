@@ -7,8 +7,8 @@ import java.util.List;
 public interface SupplierDao {
 
     void add(Supplier supplier);
-    static Supplier find(int id) {return null;}
+    Supplier find(int id);
     void remove(int id);
 
-    static List<Supplier> getAll() {return null;}
+    List<Supplier> getAll();
 }
