@@ -26,8 +26,8 @@ public class ProductDaoJdbc implements ProductDao {
                 + product.getDefaultPrice() + "', '"
                 + product.getDefaultCurrency() + "', '"
                 + product.getDescription() + "', '"
-                + 1 + "', '"
-                + 1 + "');";
+                + product.getProductCategory().getId() + "', '"
+                + product.getSupplier().getId() + "');";
         executeQuery(query);
     }
 
