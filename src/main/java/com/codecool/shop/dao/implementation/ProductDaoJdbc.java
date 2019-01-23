@@ -63,8 +63,7 @@ public class ProductDaoJdbc implements ProductDao {
         executeQuery(query);
     }
 
-    @Override
-    public List<Product> getAll() {
+    public static List<Product> getAll() {
         String query = "SELCET * FROM products;";
 
         List<Product> resultList = new ArrayList<>();
@@ -163,7 +162,7 @@ public class ProductDaoJdbc implements ProductDao {
         }
     }
 
-    private Connection getConnection() throws SQLException {
+    private static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
     }
 

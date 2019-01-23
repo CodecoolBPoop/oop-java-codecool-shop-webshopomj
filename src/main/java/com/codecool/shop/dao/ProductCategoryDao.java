@@ -10,6 +10,6 @@ public interface ProductCategoryDao {
     static ProductCategory find(int id) {return null;}
     void remove(int id);
 
-    List<ProductCategory> getAll();
+    static List<ProductCategory> getAll() {return null;}
 
 }

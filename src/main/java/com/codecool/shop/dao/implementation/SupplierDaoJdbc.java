@@ -49,8 +49,7 @@ public class SupplierDaoJdbc implements SupplierDao {
         executeQuery(query);
     }
 
-    @Override
-    public List<Supplier> getAll() {
+    public static List<Supplier> getAll() {
         String query = "SELECT * FROM suppliers;";
 
         List<Supplier> resultList = new ArrayList<>();

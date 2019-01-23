@@ -10,5 +10,5 @@ public interface SupplierDao {
     static Supplier find(int id) {return null;}
     void remove(int id);
 
-    List<Supplier> getAll();
+    static List<Supplier> getAll() {return null;}
 }
