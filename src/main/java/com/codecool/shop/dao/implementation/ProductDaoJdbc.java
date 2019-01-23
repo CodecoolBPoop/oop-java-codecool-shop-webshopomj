@@ -71,24 +71,7 @@ public class ProductDaoJdbc implements ProductDao {
 
         List<Product> resultList = new ArrayList<>();
 
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query);
-        ) {
-            while (resultSet.next()) {
-                Product result = new Product(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getFloat("default_price"),
-                        resultSet.getString("currency"),
-                        resultSet.getString("description"),
-                        productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
-                        supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
-                resultList.add(result);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        getProductResult(query, resultList);
 
         return resultList;
     }
@@ -99,24 +82,7 @@ public class ProductDaoJdbc implements ProductDao {
 
         List<Product> resultList = new ArrayList<>();
 
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query);
-        ) {
-            while (resultSet.next()) {
-                Product result = new Product(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getFloat("default_price"),
-                        resultSet.getString("currency"),
-                        resultSet.getString("description"),
-                        productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
-                        supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
-                resultList.add(result);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        getProductResult(query, resultList);
 
         return resultList;
     }
@@ -127,24 +93,7 @@ public class ProductDaoJdbc implements ProductDao {
 
         List<Product> resultList = new ArrayList<>();
 
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query);
-        ) {
-            while (resultSet.next()) {
-                Product result = new Product(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getFloat("default_price"),
-                        resultSet.getString("currency"),
-                        resultSet.getString("description"),
-                        productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
-                        supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
-                resultList.add(result);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        getProductResult(query, resultList);
 
         return resultList;
     }
@@ -163,4 +112,24 @@ public class ProductDaoJdbc implements ProductDao {
         return DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
     }
 
+    private void getProductResult(String query, List<Product> resultList) {
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ) {
+            while (resultSet.next()) {
+                Product result = new Product(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getFloat("default_price"),
+                        resultSet.getString("currency"),
+                        resultSet.getString("description"),
+                        productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
+                        supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
+                resultList.add(result);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
