@@ -17,6 +17,41 @@ public class ProductDaoJdbc implements ProductDao {
     private ProductCategoryDaoJdbc productCategoryDaoJdbc = new ProductCategoryDaoJdbc();
     private SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc();
 
+    private void executeQuery(String query) {
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+        ) {
+            statement.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
+    }
+
+    private void getProductResult(String query, List<Product> resultList) {
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ) {
+            while (resultSet.next()) {
+                Product result = new Product(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getFloat("default_price"),
+                        resultSet.getString("currency"),
+                        resultSet.getString("description"),
+                        productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
+                        supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
+                resultList.add(result);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void add(Product product) {
         String query = "INSERT INTO products " +
@@ -98,38 +133,4 @@ public class ProductDaoJdbc implements ProductDao {
         return resultList;
     }
 
-    private void executeQuery(String query) {
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-        ) {
-            statement.execute(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
-    }
-
-    private void getProductResult(String query, List<Product> resultList) {
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query);
-        ) {
-            while (resultSet.next()) {
-                Product result = new Product(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getFloat("default_price"),
-                        resultSet.getString("currency"),
-                        resultSet.getString("description"),
-                        productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
-                        supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
-                resultList.add(result);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

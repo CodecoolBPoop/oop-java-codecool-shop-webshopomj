@@ -13,6 +13,20 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
     private static final String DB_USER = System.getenv("DB_USER");
     private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
 
+    private void executeQuery(String query) {
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+        ) {
+            statement.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
+    }
+
     @Override
     public void add(Product product) {
         String query = "INSERT INTO shopping_cart (product_id, amount, price)" +
@@ -60,17 +74,4 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
         return resultList;
     }
 
-    private void executeQuery(String query) {
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-        ) {
-            statement.execute(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
-    }
 }

@@ -13,6 +13,20 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
     private static final String DB_USER = System.getenv("DB_USER");
     private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
 
+    private void executeQuery(String query) {
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+        ) {
+            statement.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
+    }
+
     @Override
     public void add(ProductCategory category) {
         String query = "INSERT INTO product_categories (name, department, description)" +
@@ -80,20 +94,6 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
         }
 
         return resultList;
-    }
-
-    private void executeQuery(String query) {
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-        ) {
-            statement.execute(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
     }
 
 }
