@@ -65,15 +65,13 @@ public class ProductCategoryDaoJdbc implements ProductCategoryDao {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ) {
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 ProductCategory result = new ProductCategory(
                         resultSet.getString("name"),
                         resultSet.getString("department"),
                         resultSet.getString("description")
                 );
                 resultList.add(result);
-            } else {
-                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();

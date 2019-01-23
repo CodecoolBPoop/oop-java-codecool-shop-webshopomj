@@ -60,14 +60,12 @@ public class SupplierDaoJdbc implements SupplierDao {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ) {
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Supplier result = new Supplier(
                         resultSet.getString("name"),
                         resultSet.getString("description")
                 );
                 resultList.add(result);
-            } else {
-                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();

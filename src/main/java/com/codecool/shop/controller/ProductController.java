@@ -76,8 +76,7 @@ public class ProductController extends HttpServlet {
 
         context.setVariable("category", productCategoryDaoJdbc.getAll());
         context.setVariable("supplier", supplierDaoJdbc.getAll());
-        context.setVariable("product", productDaoJdbc.getAll());
-
+        context.setVariable("products", productDaoJdbc.getAll());
 
 
         engine.process("product/index.html", context, resp.getWriter());

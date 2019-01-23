@@ -75,7 +75,7 @@ public class ProductDaoJdbc implements ProductDao {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ) {
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Product result = new Product(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
@@ -85,8 +85,6 @@ public class ProductDaoJdbc implements ProductDao {
                         productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
                         supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
                 resultList.add(result);
-            } else {
-                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,7 +103,7 @@ public class ProductDaoJdbc implements ProductDao {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ) {
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Product result = new Product(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
@@ -115,8 +113,6 @@ public class ProductDaoJdbc implements ProductDao {
                         productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
                         supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
                 resultList.add(result);
-            } else {
-                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,7 +131,7 @@ public class ProductDaoJdbc implements ProductDao {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
         ) {
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Product result = new Product(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
@@ -145,8 +141,6 @@ public class ProductDaoJdbc implements ProductDao {
                         productCategoryDaoJdbc.find(resultSet.getInt("product_category_id")),
                         supplierDaoJdbc.find(resultSet.getInt("supplier_id")));
                 resultList.add(result);
-            } else {
-                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
