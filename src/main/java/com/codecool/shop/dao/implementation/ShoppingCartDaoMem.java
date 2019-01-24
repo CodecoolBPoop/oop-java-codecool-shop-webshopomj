@@ -16,6 +16,10 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     }
 
 
+    public void updateNumOfItemsInCart(){
+        itemsInCart += 1;
+    }
+
     public static ShoppingCartDaoMem getInstance() {
         if (instance == null) {
             instance = new ShoppingCartDaoMem();
@@ -51,7 +55,7 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     public List<Product> getAll() {
         return data;
     }
-    
+
 
     public int getItemsInCart(){
         return itemsInCart;

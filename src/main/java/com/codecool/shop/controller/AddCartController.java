@@ -20,39 +20,33 @@ import java.util.Map;
 @WebServlet(urlPatterns = {"/cart"})
 public class AddCartController extends HttpServlet {
 
-
-
-
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
 
-        int id = Integer.parseInt(req.getParameter("incoming"));
+        int idOfProd = Integer.parseInt(req.getParameter("incoming"));
+        Product itemOfProdStore = productDataStore.find(idOfProd);
 
-        Product tofind = productDataStore.find(id);
-        System.out.println(tofind.hashCode());
+        cartDataStore.add(itemOfProdStore);
+        ((ShoppingCartDaoMem) cartDataStore).updateNumOfItemsInCart();
 
-        cartDataStore.add(tofind);
+        List<Product> productsInCart = cartDataStore.getAll();
 
-        List<Product> productsincart = cartDataStore.getAll();
-
-        Map<Integer, Integer> map = new HashMap<>();
-
-        for (Product student : productsincart) {
+        Map<Integer, Integer> itemFreq = new HashMap<>();
+        for (Product student : productsInCart) {
             Integer key  = student.getId();
-            if(map.containsKey(key)){
-                Integer idd = map.get(key);
-                map.put(key, idd +1);
-
+            if(itemFreq.containsKey(key)){
+                Integer amount = itemFreq.get(key);
+                itemFreq.put(key, amount +1);
             }else{
                 Integer amount = 1;
-                map.put(key, amount);
+                itemFreq.put(key, amount);
             }
         }
 
-        System.out.println(map);
+        System.out.println(itemFreq);
+        System.out.println(((ShoppingCartDaoMem) cartDataStore).getItemsInCart()  + " item/s in Shopping Cart\n");
 
         resp.sendRedirect("index.html");
     }
