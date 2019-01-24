@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.ShoppingCart;
 
 import java.sql.*;
@@ -12,6 +13,8 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
     private static final String DATABASE = System.getenv("DATABASE");
     private static final String DB_USER = System.getenv("DB_USER");
     private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
+    private ProductCategoryDaoJdbc productCategoryDaoJdbc = new ProductCategoryDaoJdbc();
+    private SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc();
 
     private void executeQuery(String query) {
         try (Connection connection = getConnection();
@@ -29,9 +32,14 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
 
     @Override
     public void add(Product product) {
-        String query = "INSERT INTO shopping_cart (product_id, amount, price)" +
-                "VALUES ('" + product.getId() + "', " + 1 + ", " + product.getPrice() + ");";
-        executeQuery(query);
+        if (isProductInCart(product.getId())) {
+            String query = "UPDATE shopping_cart SET amount = amount +1 WHERE product_id = '" + product.getId() + "';";
+            executeQuery(query);
+        } else {
+            String query = "INSERT INTO shopping_cart (product_id, amount, price)" +
+                    "VALUES ('" + product.getId() + "', " + 1 + ", " + product.getPrice() + ");";
+            executeQuery(query);
+        }
     }
 
     @Override
@@ -46,9 +54,29 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
     }
 
     @Override
-    public Product find(int id) {
+    public Product find(int productId) {
         return null;
     }
+
+    public Boolean isProductInCart(int productID) {
+        String query = "SELECT * FROM shopping_cart WHERE product_id = '" + productID + "';";
+
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ) {
+            if (resultSet.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    ;
 
     public List<ShoppingCart> getShoppingCart() {
         String query = "SELECT * FROM shopping_cart;";
