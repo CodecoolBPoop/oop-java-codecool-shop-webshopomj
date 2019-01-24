@@ -1,9 +1,6 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoJdbc;
-import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
-import com.codecool.shop.model.Product;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

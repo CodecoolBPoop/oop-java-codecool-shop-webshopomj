@@ -48,7 +48,7 @@
         <tr th:each="inc,iterStat : ${inCart}">
             <td th:attr="src='/static/img/product_' + ${inc.getProductId()} + '.jpg'"></td>
             <td th:text="${inc.name}">Item name</td>
-            <td th:text="${inc.getPrice()}" >Price</td>
+            <td th:text="${#numbers.formatDecimal(inc.getPrice()*inc.getAmount(), 0, 2)} + ' USD'">Price</td>
             <td th:text="${inc.getAmount()}" >Amount</td>
             <div><td><button type="button" th:id="${inc.getProductId()}" class="icon-button btn btn-danger"><i>-</i></button></td></div>
         </tr>
