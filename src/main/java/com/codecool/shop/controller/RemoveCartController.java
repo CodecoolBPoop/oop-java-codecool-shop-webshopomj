@@ -17,13 +17,9 @@ public class RemoveCartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
         ShoppingCartDaoJdbc shoppingCartDaoJdbc = new ShoppingCartDaoJdbc();
 
-        String id = req.getParameter("orderID");
-        //System.out.println("Removing this item: " + shoppingCartDaoJdbc.find(Integer.parseInt(id)));
+        String id = req.getParameter("id");
         shoppingCartDaoJdbc.remove(Integer.parseInt(id));
-        //System.out.println("IN CART AFTER REMOVE: " + shoppingCartDaoJdbc.getAll() + "\n");
-
     }
 }
