@@ -21,6 +21,14 @@ public class ShoppingCart extends BaseModel {
         this.price = price;
     }
 
+    public int getProductId() {
+        return productId;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
     public List<Product> getProductInShoppingCart() {
         return productInShoppingCart;
     }

@@ -41,7 +41,7 @@
             <th>Price</th>
         </tr>
         <tr th:each="inc,iterStat : ${inCart}">
-            <td th:attr="src='/static/img/product_' + ${inc.id} + '.jpg'"></td>
+            <td th:attr="src='/static/img/product_' + ${inc.getProductId()} + '.jpg'"></td>
             <td th:text="${inc.name}">Item name</td>
             <td th:text="${inc.getPrice()}">Price</td>
         </tr>
