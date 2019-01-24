@@ -48,12 +48,20 @@
             <td th:attr="src='/static/img/product_' + ${inc.id} + '.jpg'"></td>
             <td th:text="${inc.name}">Item name</td>
             <td th:text="${inc.getPrice()}">Price</td>
-            <td><button type="button" th:id="${inc.getOrderID()}" class="icon-button btn btn-danger fa fa-trash fa-fw"><i></i></button></td>
+            <td>
+                <button type="button" th:id="${inc.getOrderID()}" class="icon-button btn btn-danger fa fa-trash fa-fw">
+                    <i></i></button>
+            </td>
         </tr>
     </table>
     <p></p>
 </div>
 
+<div>
+    <a href="/checkout" name="checkCart" methods="get">
+        <button class="btn btn-success carto" type="submit" name="incoming">Checkout</button>
+    </a>
+</div>
 <div th:replace="footer.html :: copy"></div>
 
 </body>
