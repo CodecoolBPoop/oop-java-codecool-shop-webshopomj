@@ -12,13 +12,13 @@ public class ShoppingCart extends BaseModel {
     private float price;
 
 
-    public ShoppingCart() {
-    }
 
-    public ShoppingCart(int productId, int amount, float price) {
+
+    public ShoppingCart(int productId, int amount, float price, String name) {
         this.productId = productId;
         this.amount = amount;
         this.price = price;
+        this.name = name;
     }
 
     public int getProductId() {
@@ -27,6 +27,10 @@ public class ShoppingCart extends BaseModel {
 
     public float getPrice() {
         return price;
+    }
+
+    public int getAmount(){
+        return amount;
     }
 
     public List<Product> getProductInShoppingCart() {

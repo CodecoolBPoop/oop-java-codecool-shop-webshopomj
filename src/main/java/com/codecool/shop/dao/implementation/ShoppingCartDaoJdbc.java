@@ -65,7 +65,7 @@ public class ShoppingCartDaoJdbc extends DaoJdbc implements ShoppingCartDao {
 
 
     public List<ShoppingCart> getShoppingCart() {
-        String query = "SELECT * FROM shopping_cart;";
+        String query = "SELECT * FROM shopping_cart JOIN products p on shopping_cart.product_id = p.id;";
 
         List<ShoppingCart> resultList = new ArrayList<>();
 
@@ -77,7 +77,9 @@ public class ShoppingCartDaoJdbc extends DaoJdbc implements ShoppingCartDao {
                 ShoppingCart result = new ShoppingCart(
                         resultSet.getInt("product_id"),
                         resultSet.getInt("amount"),
-                        resultSet.getFloat("price")
+                        resultSet.getFloat("price"),
+                        resultSet.getString("name")
+
                 );
                 resultList.add(result);
             }

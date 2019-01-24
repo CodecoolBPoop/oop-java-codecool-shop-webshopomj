@@ -19,6 +19,7 @@ $().ready(function ()  {
                 data: {id:event.target.id},
                 dataType: "JSON"
             });
+
             console.log("del");
             console.log(event.target["id"]);
         });
