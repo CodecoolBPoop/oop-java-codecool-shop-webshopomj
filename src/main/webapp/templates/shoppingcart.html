@@ -43,17 +43,29 @@
             <th>Product name</th>
             <th>Price</th>
             <th>Amount</th>
-            <th>Remove item</th>
+            <div>
+                <th>Remove item</th>
+                <th>Add item</th>
+            </div>
         </tr>
         <tr th:each="inc,iterStat : ${inCart}">
             <td th:attr="src='/static/img/product_' + ${inc.getProductId()} + '.jpg'"></td>
             <td th:text="${inc.name}">Item name</td>
             <td th:text="${inc.getPrice()}" >Price</td>
             <td th:text="${inc.getAmount()}" >Amount</td>
-            <div><td><button type="button" th:id="${inc.getProductId()}" class="icon-button btn btn-danger"><i>-</i></button></td></div>
+            <div>
+                <div><td><button type="button" th:id="${inc.getProductId()}" class="icon-button btn btn-danger"><i>-</i></button></td></div>
+                <div>
+                    <td><button type="button" th:id="${inc.getProductId()}" class="icon-button btn btn-success"><i>+</i></button></td>
+                </div>
+            </div>
         </tr>
     </table>
-    <p></p>
+    <div>
+        <a href="checkout" methods="get">
+            <button>Checkout</button>
+        </a>
+    </div>
 </div>
 
 <div th:replace="footer.html :: copy"></div>
