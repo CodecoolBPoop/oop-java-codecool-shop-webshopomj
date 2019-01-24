@@ -2,7 +2,6 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.ShoppingCart;
 
 import java.sql.*;
@@ -11,24 +10,24 @@ import java.util.List;
 
 
 public class ShoppingCartDaoJdbc extends DaoJdbc implements ShoppingCartDao {
-    private ProductCategoryDaoJdbc productCategoryDaoJdbc = new ProductCategoryDaoJdbc();
-    private SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc();
 
     @Override
     public void add(Product product) {
+        String query;
+
         if (isProductInCart(product.getId())) {
-            String query = "UPDATE shopping_cart SET amount = amount +1 WHERE product_id = '" + product.getId() + "';";
-            executeQuery(query);
+            query = "UPDATE shopping_cart SET amount = amount +1 WHERE product_id = '" + product.getId() + "';";
         } else {
-            String query = "INSERT INTO shopping_cart (product_id, amount, price)" +
+            query = "INSERT INTO shopping_cart (product_id, amount, price)" +
                     "VALUES ('" + product.getId() + "', " + 1 + ", " + product.getPrice() + ");";
-            executeQuery(query);
         }
+        executeQuery(query);
     }
 
     @Override
     public void remove(int id) {
-        String query = "UPDATE shopping_cart SET amount = amount - 1 WHERE product_id = '" + id + "'; DELETE FROM shopping_cart WHERE amount <= 0";
+        String query = "UPDATE shopping_cart SET amount = amount - 1 WHERE product_id = '" + id + "'; " +
+                "DELETE FROM shopping_cart WHERE amount <= 0";
         executeQuery(query);
     }
 
@@ -62,7 +61,23 @@ public class ShoppingCartDaoJdbc extends DaoJdbc implements ShoppingCartDao {
         return null;
     }
 
+    public int getSumOfAmounts() {
+        String query = "SELECT SUM(amount) AS sum FROM shopping_cart;";
 
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ) {
+            if (resultSet.next()) {
+                return resultSet.getInt("sum");
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     public List<ShoppingCart> getShoppingCart() {
         String query = "SELECT * FROM shopping_cart JOIN products p on shopping_cart.product_id = p.id;";
