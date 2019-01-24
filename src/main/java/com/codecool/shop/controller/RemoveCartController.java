@@ -1,6 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoJdbc;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
 
@@ -16,11 +17,13 @@ public class RemoveCartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
+        //ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
+        ShoppingCartDaoJdbc shoppingCartDaoJdbc = new ShoppingCartDaoJdbc();
+
         String id = req.getParameter("orderID");
-  //      System.out.println("Removing this item: " + cartDataStore.find(Integer.parseInt(id)));
-        cartDataStore.remove(Integer.parseInt(id));
-  //      System.out.println("IN CART AFTER REMOVE: " + cartDataStore.getAll() + "\n");
+        //System.out.println("Removing this item: " + shoppingCartDaoJdbc.find(Integer.parseInt(id)));
+        shoppingCartDaoJdbc.remove(Integer.parseInt(id));
+        //System.out.println("IN CART AFTER REMOVE: " + shoppingCartDaoJdbc.getAll() + "\n");
 
     }
 }
