@@ -30,7 +30,7 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
     @Override
     public void add(Product product) {
         String query = "INSERT INTO shopping_cart (product_id, amount, price)" +
-                "VALUES ('" + product.getId() + "', " + 1 + "', " + 1 + "');";
+                "VALUES ('" + product.getId() + "', " + 1 + ", " + product.getPrice() + ");";
         executeQuery(query);
     }
 

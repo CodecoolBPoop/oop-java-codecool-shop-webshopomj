@@ -58,11 +58,11 @@ public class Product extends BaseModel {
         this.defaultCurrency = defaultCurrency;
     }
 
-    public String getPrice() {
+    public String getPriceAndCurrency() {
         return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
     }
 
-    public float getPr() {
+    public float getPrice() {
         return this.defaultPrice;
     }
 
