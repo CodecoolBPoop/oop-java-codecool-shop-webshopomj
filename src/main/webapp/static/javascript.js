@@ -16,12 +16,11 @@ $().ready(function ()  {
             $.ajax({
                 type: "POST",
                 url: "/rem_cart",
-                data: {orderID:event.target.id},
+                data: {id:event.target.id},
                 dataType: "JSON"
             });
             console.log("del");
             console.log(event.target["id"]);
-            btn.parentElement.parentElement.remove();
         });
     })
 });

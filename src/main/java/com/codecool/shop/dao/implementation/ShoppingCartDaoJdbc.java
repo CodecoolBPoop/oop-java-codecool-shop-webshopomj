@@ -44,9 +44,11 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
 
     @Override
     public void remove(int id) {
-        String query = "DELETE FROM shopping_cart WHERE product_id = '" + id + "';";
+        String query = "UPDATE shopping_cart SET amount = amount - 1 WHERE product_id = '" + id + "'; DELETE FROM shopping_cart WHERE amount <= 0";
         executeQuery(query);
     }
+
+
 
     @Override
     public List<Product> getAll() {
@@ -76,7 +78,7 @@ public class ShoppingCartDaoJdbc implements ShoppingCartDao {
         return null;
     }
 
-    ;
+
 
     public List<ShoppingCart> getShoppingCart() {
         String query = "SELECT * FROM shopping_cart;";

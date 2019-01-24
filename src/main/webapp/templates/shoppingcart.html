@@ -48,7 +48,7 @@
             <td th:attr="src='/static/img/product_' + ${inc.getProductId()} + '.jpg'"></td>
             <td th:text="${inc.name}">Item name</td>
             <td th:text="${inc.getPrice()}">Price</td>
-            <td><button type="button" th:id="${inc.getProductId()}" class="icon-button btn btn-danger fa fa-trash fa-fw"><i></i></button></td>
+            <div><td><button type="button" th:id="${inc.getProductId()}" class="icon-button btn btn-danger"><i>-</i></button></td></div>
         </tr>
     </table>
     <p></p>
