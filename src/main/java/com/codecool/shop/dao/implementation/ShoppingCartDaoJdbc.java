@@ -25,13 +25,11 @@ public class ShoppingCartDaoJdbc extends DaoJdbc implements ShoppingCartDao {
     }
 
     @Override
-    public void remove(int id) {
-        String query = "UPDATE shopping_cart SET amount = amount - 1 WHERE product_id = '" + id + "'; " +
-                "DELETE FROM shopping_cart WHERE amount <= 0";
+    public void remove(int productId) {
+        String query = "UPDATE shopping_cart SET amount = amount - 1 WHERE product_id = '" + productId + "';" +
+                "DELETE FROM shopping_cart WHERE amount <= 0;";
         executeQuery(query);
     }
-
-
 
     @Override
     public List<Product> getAll() {
@@ -70,8 +68,6 @@ public class ShoppingCartDaoJdbc extends DaoJdbc implements ShoppingCartDao {
         ) {
             if (resultSet.next()) {
                 return resultSet.getInt("sum");
-            } else {
-                return 0;
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -11,9 +11,6 @@ public class ShoppingCart extends BaseModel {
     private int amount;
     private float price;
 
-
-
-
     public ShoppingCart(int productId, int amount, float price, String name) {
         this.productId = productId;
         this.amount = amount;
@@ -41,15 +38,11 @@ public class ShoppingCart extends BaseModel {
         this.productInShoppingCart = productInShoppingCart;
     }
 
-    // adding
     public void addToShoppingCart(Product productToAdd) {
         //productToAdd.id = numOfItemsInShoppingCart;
         numOfItemsInShoppingCart += 1;
         productInShoppingCart.add(productToAdd);
     }
-
-    // removing from shopping cart
-
 
     @Override
     public String toString() {

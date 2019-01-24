@@ -15,8 +15,7 @@ public class ProductCategoryDaoJdbc extends DaoJdbc implements ProductCategoryDa
                 "VALUES ('"
                 + category.getName() + "', '"
                 + category.getDepartment() + "', '"
-                + category.getDescription()
-                + "');";
+                + category.getDescription() + "');";
         executeQuery(query);
     }
 
