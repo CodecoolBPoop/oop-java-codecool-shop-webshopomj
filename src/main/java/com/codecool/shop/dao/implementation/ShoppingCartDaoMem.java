@@ -26,7 +26,6 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
 
     @Override
     public void add(Product product) {
-        product.setId(data.size());
         data.add(product);
     }
 
@@ -52,6 +51,7 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
     public List<Product> getAll() {
         return data;
     }
+    
 
     public int getItemsInCart(){
         return itemsInCart;
