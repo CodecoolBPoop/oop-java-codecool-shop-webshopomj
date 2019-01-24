@@ -1,16 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.ShoppingCartDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.dao.implementation.*;
-import com.codecool.shop.config.TemplateEngineUtil;
 
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -28,6 +19,7 @@ public class ProductController extends HttpServlet {
     private ProductCategoryDaoJdbc productCategoryDaoJdbc = new ProductCategoryDaoJdbc();
     private SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc();
     private ProductDaoJdbc productDaoJdbc = new ProductDaoJdbc();
+    private ShoppingCartDaoJdbc shoppingCartDaoJdbc = new ShoppingCartDaoJdbc();
 
 
     @Override
@@ -49,7 +41,6 @@ public class ProductController extends HttpServlet {
         context.setVariable("recipient", "World");
         context.setVariable("category", productCategoryDataStore.getAll());
 
-        context.setVariable("products", productDataStore.getAll());
         context.setVariable("numofitems", (((ShoppingCartDaoMem) cartDataStore).getItemsInCart()));
 
         context.setVariable("supplier", supplierDataStore.getAll());
@@ -80,8 +71,8 @@ public class ProductController extends HttpServlet {
 
         context.setVariable("category", productCategoryDaoJdbc.getAll());
         context.setVariable("supplier", supplierDaoJdbc.getAll());
-        context.setVariable("products", productDaoJdbc.getAll());
 
+        context.setVariable("numofitems", shoppingCartDaoJdbc.getSumOfAmounts());
 
         if (!req.getParameterNames().hasMoreElements() || req.getParameterValues(req.getParameterNames().nextElement())[0].equals("All")) {
             context.setVariable("products", productDaoJdbc.getAll());
@@ -101,9 +92,7 @@ public class ProductController extends HttpServlet {
             }
         }
 
-
         engine.process("product/index.html", context, resp.getWriter());
-
     }
 
 }

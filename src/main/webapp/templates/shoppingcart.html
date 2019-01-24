@@ -43,22 +43,14 @@
             <th>Product name</th>
             <th>Price</th>
             <th>Amount</th>
-            <div>
-                <th>Remove item</th>
-                <th>Add item</th>
-            </div>
+            <th>Remove item</th>
         </tr>
-        <tr th:each="inc,iterStat : ${inCart}">
-            <td th:attr="src='/static/img/product_' + ${inc.getProductId()} + '.jpg'"></td>
-            <td th:text="${inc.name}">Item name</td>
-            <td th:text="${inc.getPrice()}" >Price</td>
-            <td th:text="${inc.getAmount()}" >Amount</td>
-            <div>
-                <div><td><button type="button" th:id="${inc.getProductId()}" class="icon-button btn btn-danger"><i>-</i></button></td></div>
-                <div>
-                    <td><button type="button" th:id="${inc.getProductId()}" class="icon-button btn btn-success"><i>+</i></button></td>
-                </div>
-            </div>
+        <tr th:each="shop,iterStat : ${shoppingcart}">
+            <td th:attr="src='/static/img/product_' + ${shop.getProductId()} + '.jpg'"></td>
+            <td th:text="${shop.name}">Item name</td>
+            <td th:text="${#numbers.formatDecimal(shop.getPrice()*shop.getAmount(), 0, 2)} + ' USD'">Price</td>
+            <td th:text="${shop.getAmount()}" >Amount</td>
+            <div><td><button type="button" th:id="${shop.getProductId()}" class="icon-button btn btn-danger"><i>-</i></button></td></div>
         </tr>
     </table>
     <div>
