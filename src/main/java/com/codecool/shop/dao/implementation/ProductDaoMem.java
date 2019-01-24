@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ProductDaoMem implements ProductDao {
 
-    private List<Product> data = new ArrayList<>();
+    private static List<Product> data = new ArrayList<>();
     private static ProductDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -29,7 +29,7 @@ public class ProductDaoMem implements ProductDao {
 
     @Override
     public void add(Product product) {
-        product.setId(data.size() + 1);
+//        product.setId(data.size() + 1);
         data.add(product);
     }
 

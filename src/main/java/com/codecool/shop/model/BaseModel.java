@@ -5,7 +5,6 @@ import java.lang.reflect.Field;
 
 public class BaseModel {
 
-    protected int id;
     protected String name;
     protected String description;
 
@@ -18,15 +17,6 @@ public class BaseModel {
     public BaseModel(String name, String description) {
         this.name = name;
         this.description = description;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

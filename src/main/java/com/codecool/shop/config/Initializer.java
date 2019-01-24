@@ -22,6 +22,7 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        /*
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
@@ -46,5 +47,6 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
         productDataStore.add(new Product("Samsung Galaxy S8", 499, "USD", "A Samsung phone... There were at least seven before this.", phone, samsung));
         productDataStore.add(new Product("Samsung Galaxy Tab S4", 179, "USD", "Full-size USB ports. Fantastic price. Great value.", tablet, samsung));
+        */
     }
 }

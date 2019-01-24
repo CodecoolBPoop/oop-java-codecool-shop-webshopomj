@@ -45,10 +45,10 @@
             <th>Remove item</th>
         </tr>
         <tr th:each="inc,iterStat : ${inCart}">
-            <td th:attr="src='/static/img/product_' + ${inc.id} + '.jpg'"></td>
+            <td th:attr="src='/static/img/product_' + ${inc.getProductId()} + '.jpg'"></td>
             <td th:text="${inc.name}">Item name</td>
             <td th:text="${inc.getPrice()}">Price</td>
-            <td><button type="button" th:id="${inc.getOrderID()}" class="icon-button btn btn-danger fa fa-trash fa-fw"><i></i></button></td>
+            <td><button type="button" th:id="${inc.getProductId()}" class="icon-button btn btn-danger fa fa-trash fa-fw"><i></i></button></td>
         </tr>
     </table>
     <p></p>
