@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
@@ -77,6 +80,25 @@ public class ProductController extends HttpServlet {
         context.setVariable("category", productCategoryDaoJdbc.getAll());
         context.setVariable("supplier", supplierDaoJdbc.getAll());
         context.setVariable("products", productDaoJdbc.getAll());
+
+
+        if (!req.getParameterNames().hasMoreElements() || req.getParameterValues(req.getParameterNames().nextElement())[0].equals("All")) {
+            context.setVariable("products", productDaoJdbc.getAll());
+        } else if (req.getParameterNames().nextElement().equals("category")) {
+            if (req.getParameter("category").equals("Tablet")) {
+                context.setVariable("products", productDaoJdbc.getBy(productCategoryDaoJdbc.find(1)));
+            } else if (req.getParameter("category").equals("Phone")) {
+                context.setVariable("products", productDaoJdbc.getBy(productCategoryDaoJdbc.find(2)));
+            }
+        } else if (req.getParameterNames().nextElement().equals("supplier")) {
+            if (req.getParameter("supplier").equals("Amazon")) {
+                context.setVariable("products", productDaoJdbc.getBy(supplierDaoJdbc.find(1)));
+            } else if (req.getParameter("supplier").equals("Lenovo")) {
+                context.setVariable("products", productDaoJdbc.getBy(supplierDaoJdbc.find(2)));
+            } else if (req.getParameter("supplier").equals("Samsung")) {
+                context.setVariable("products", productDaoJdbc.getBy(supplierDaoJdbc.find(3)));
+            }
+        }
 
 
         engine.process("product/index.html", context, resp.getWriter());
