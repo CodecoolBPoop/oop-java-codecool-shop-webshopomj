@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SupplierDaoMem implements SupplierDao {
 
-    private List<Supplier> data = new ArrayList<>();
+    private static List<Supplier> data = new ArrayList<>();
     private static SupplierDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -25,7 +25,7 @@ public class SupplierDaoMem implements SupplierDao {
 
     @Override
     public void add(Supplier supplier) {
-        supplier.setId(data.size() + 1);
+//        supplier.setId(data.size() + 1);
         data.add(supplier);
     }
 

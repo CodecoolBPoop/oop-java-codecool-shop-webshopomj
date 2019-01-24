@@ -3,6 +3,9 @@ package com.codecool.shop.controller;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoJdbc;
+import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.ShoppingCartDaoJdbc;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
@@ -20,7 +23,8 @@ import java.io.IOException;
 public class AddCartController extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        /*
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ShoppingCartDao cartDataStore = ShoppingCartDaoMem.getInstance();
 
@@ -48,5 +52,17 @@ public class AddCartController extends HttpServlet {
         System.out.println("    THESE ARE IN CART     :" + cartDataStore.getAll() + "\n");
 
         resp.sendRedirect("index.html");
+*/
+
+        ProductDaoJdbc productDaoJdbc = new ProductDaoJdbc();
+        ShoppingCartDaoJdbc shoppingCartDaoJdbc = new ShoppingCartDaoJdbc();
+
+        String idOfProduct = req.getParameter("incoming");
+        int productId = Integer.parseInt(idOfProduct);
+
+        Product itemToAdd = productDaoJdbc.find(productId);
+        shoppingCartDaoJdbc.add(itemToAdd);
+
+        resp.sendRedirect("/");
     }
 }
