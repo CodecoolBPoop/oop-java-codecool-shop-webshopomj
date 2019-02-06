@@ -1,8 +1,12 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.ProductCategoryDao;
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.*;
 
+import com.codecool.shop.filter.Filter;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -16,9 +20,8 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
 
-    private ProductCategoryDaoJdbc productCategoryDaoJdbc = new ProductCategoryDaoJdbc();
-    private SupplierDaoJdbc supplierDaoJdbc = new SupplierDaoJdbc();
-    private ProductDaoJdbc productDaoJdbc = new ProductDaoJdbc();
+    private ProductCategoryDao productCategoryDaoJdbc = new ProductCategoryDaoJdbc();
+    private SupplierDao supplierDaoJdbc = new SupplierDaoJdbc();
     private ShoppingCartDaoJdbc shoppingCartDaoJdbc = new ShoppingCartDaoJdbc();
 
 
@@ -64,6 +67,8 @@ public class ProductController extends HttpServlet {
         }
 */
 
+        Filter filter = new Filter();
+
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
@@ -74,23 +79,7 @@ public class ProductController extends HttpServlet {
 
         context.setVariable("numofitems", shoppingCartDaoJdbc.getSumOfAmounts());
 
-        if (!req.getParameterNames().hasMoreElements() || req.getParameterValues(req.getParameterNames().nextElement())[0].equals("All")) {
-            context.setVariable("products", productDaoJdbc.getAll());
-        } else if (req.getParameterNames().nextElement().equals("category")) {
-            if (req.getParameter("category").equals("Tablet")) {
-                context.setVariable("products", productDaoJdbc.getBy(productCategoryDaoJdbc.find(1)));
-            } else if (req.getParameter("category").equals("Phone")) {
-                context.setVariable("products", productDaoJdbc.getBy(productCategoryDaoJdbc.find(2)));
-            }
-        } else if (req.getParameterNames().nextElement().equals("supplier")) {
-            if (req.getParameter("supplier").equals("Amazon")) {
-                context.setVariable("products", productDaoJdbc.getBy(supplierDaoJdbc.find(1)));
-            } else if (req.getParameter("supplier").equals("Lenovo")) {
-                context.setVariable("products", productDaoJdbc.getBy(supplierDaoJdbc.find(2)));
-            } else if (req.getParameter("supplier").equals("Samsung")) {
-                context.setVariable("products", productDaoJdbc.getBy(supplierDaoJdbc.find(3)));
-            }
-        }
+        context.setVariable("products", filter.filterRequest(req));
 
         engine.process("product/index.html", context, resp.getWriter());
     }

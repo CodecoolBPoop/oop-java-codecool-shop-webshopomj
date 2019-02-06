@@ -46,6 +46,32 @@ public class ProductCategoryDaoJdbc extends DaoJdbc implements ProductCategoryDa
     }
 
     @Override
+    public ProductCategory find(String name) {
+        String query = "SELECT * FROM product_categories WHERE name = '" + name + "';";
+
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ) {
+            if (resultSet.next()) {
+                ProductCategory result = new ProductCategory(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("department"),
+                        resultSet.getString("description")
+                );
+                return result;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
     public void remove(int id) {
         String query = "DELETE FROM product_categories WHERE id = '" + id + "';";
         executeQuery(query);

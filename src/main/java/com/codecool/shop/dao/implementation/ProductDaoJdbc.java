@@ -116,4 +116,15 @@ public class ProductDaoJdbc extends DaoJdbc implements ProductDao {
         return resultList;
     }
 
+    @Override
+    public List<Product> getBy(ProductCategory productCategory, Supplier supplier) {
+        String query = "SELECT * FROM products WHERE product_category_id = '" + productCategory.getId()
+                        + "' AND supplier_id = '" + supplier.getId() + "';";
+
+        List<Product> resultList = new ArrayList<>();
+
+        getProductResult(query, resultList);
+
+        return resultList;
+    }
 }

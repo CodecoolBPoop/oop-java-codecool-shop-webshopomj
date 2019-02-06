@@ -48,17 +48,16 @@
     <div class="well well-sm">
         <form action="/" method="get">
             <label for="category">Category:</label>
-            <select name="category" id="category" class="dropdown" onclick="this.form.submit();">
+            <select name="category" id="category" class="dropdown">
                 <option>All</option>
                 <option th:each="categ,iterStat : ${category}" th:text="${categ.name}">Category Title</option>
             </select>
-        </form>
-        <form action="/" method="get">
             <label for="supplier">Supplier:</label>
-            <select name="supplier" id="supplier" class="dropdown" onclick="this.form.submit();">
+            <select name="supplier" id="supplier" class="dropdown">
                 <option>All</option>
                 <option th:each="suppl,iterStat : ${supplier}" th:text="${suppl.name}">Supplier Name</option>
             </select>
+            <button type="submit" onclick="this.form.submit();">Filter</button>
         </form>
     </div>
 
